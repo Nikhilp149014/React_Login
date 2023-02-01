@@ -1,0 +1,70 @@
+.greetings {
+    font-family: Montserrat;
+    position: absolute;
+    top: 25%;
+    left: 4%;
+}
+
+.text {
+    position: absolute;
+    top: 28%;
+    left: 4%;
+}
+
+.SignIn {
+    width: 100%;
+}
+
+.loginform {
+    position: absolute;
+    top: 34%;
+    left: 4%;
+}
+
+.size {
+    font-size: 10px;
+}
+
+.tagline {
+    position: relative;
+    top: 36%;
+    font-weight: 800;
+    font-size: 54px;
+    line-height: 60px;
+    right: 0%;
+}
+
+.login-image {
+    position: absolute;
+    top: 17%;
+    right: 0%;
+    width: 42%;
+    height: 58%;
+}
+
+.upper-Graphics {
+    /* position: absolute; */
+    width: 30%;
+    height: 20%;
+}
+
+.lower-Graphics {
+    position: absolute;
+    width: 60%;
+    height: 28%;
+    right: 0%;
+    bottom: 0%;
+    padding: 0%;
+    margin: 0%;
+}
+
+
+.sign-in-facebook
+  {
+    /* background-image: url('../src/images/facebook_icon.png'); */
+    background-position: 10% -7px;
+    background-repeat: no-repeat;
+    background-size: 39px 43px;
+    padding-left: 81px;
+    color: #000;
+  }

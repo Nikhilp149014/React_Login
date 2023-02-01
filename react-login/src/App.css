@@ -1,0 +1,141 @@
+.App {
+  background-color: white;
+}
+
+.Auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.Auth-form {
+  width: 420px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.Auth-form-content {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.Auth-form-title {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 24px;
+  color: rgb(34, 34, 34);
+  font-weight: 800;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(34, 34, 34);
+}
+.btn-btn-signin {
+  position: absolute;
+  left: 89.16%;
+  right: 2.76%;
+  color: white;
+  top: 5.00%;
+  bottom: 88.11%;
+  background: #EF1717;
+  border-color: #EF1717;
+  border-radius: 0px;
+  border-color: red;
+}
+.email-address{
+position: absolute;
+width: 150px;
+height: 20px;
+left: 545px;
+top: 839px;
+margin-top: 5%;
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 29px;
+text-transform: capitalize;
+color: #000000;
+}
+.get-started-btn{
+position: absolute;
+margin-top: 0%;
+width: 132px;
+height: 39px;
+background: #EF1717;
+color: white;
+
+}
+.wt-img{
+  width: 100%;
+  
+}
+.mt-50{
+  padding-top: 1.15%;
+  
+}
+.mt-70{
+  padding-top: 1.5%;
+  
+}
+.img-wd {
+  width: 67%;
+}
+.ft-fm{
+  font-size: 4rem;
+  font-weight: bold;
+  color:#5f5d5d
+}
+.ht{
+  height: 100vh;
+}
+.container-login100 {
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #9053c7;
+  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+
+@media (max-width:629px) {
+  img#optionalstuff {
+    display: none;
+  }
+  img#headerimg {
+    display: none;
+  }
+  img#Landingpage_01 {
+    display: none;
+  }
+  img#Landingpage_02 {
+    display: none;
+  }
+  img#Landingpage_03 {
+    display: none;
+  }
+  img#Landingpage_04 {
+    display: none;
+  }
+}
+.ms-left{
+  margin-left: 7rem;
+  /* float:right; */
+}

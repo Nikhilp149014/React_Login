@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "axios": "^1.2.2",
+    "flask": "^0.2.10",
+    "gapi-script": "^1.2.0",
+    "react-content": "^0.0.1",
+    "react-google-login": "^5.2.2",
+    "styled-components": "^5.3.6",
+    "sweetalert2-react": "^0.8.3"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
