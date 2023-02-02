@@ -19,8 +19,8 @@ function LoginForm() {
     // const { linkedInLogin } = useState('');
     const navigate = useNavigate();
     const [code, setCode] = React.useState("");
-    
-  const [errorMessage, setErrorMessage] = React.useState("");
+
+    const [errorMessage, setErrorMessage] = React.useState("");
     const routeChange = () => {
         console.log("onclick triggered!!!");
         navigate('/Home');
@@ -76,44 +76,52 @@ function LoginForm() {
 
     const onSuccess = (res) => {
         setProfile(res.profileObj);
+        // const g_Email=res.profileObj.email              //'imranmulla67@gmail.com'
+        // const g_name=res.profileObj.name                // imran mulla
+        // const g_familyName=res.profileObj.familyName    //mulla
+        // const g_givenName=res.profileObj.givenName          //imran
+        // const g_imageUrl=res.profileObj.imageUrl          //"https://lh3.googleusercontent.com/a/AEdFTp7hue8frI2XB4WyK5Bqa7aaUxQImzedmUPEdp3MMg=s96-c
+        // const g_googleId=res.profileObj.googleId          //100399866126888046874
+
+        axios.post("http://127.0.0.1:5000/Google_Register", {
+        Name: res.profileObj.name ,
+        email: res.profileObj.email,
+        Contact: '',
+        Username: res.profileObj.givenName,
+        Password: '',
+        C_Password: '',
+
+    }, {
+        headers: { 'Content-Type': 'application/json' }
+    }).then(response => {
         Swal.fire({
             type: 'success',
             title: 'Good job !Login Successfully',
+            timer: 2000,
+
         })
-        setTimeout(function () {
-            window.location.replace("/Home");
-        }, 2000);
+        sessionStorage.setItem('email', email);
+        window.location.replace("/Home");
+        //history.push("/Home");
+
+    }).catch(error => {
+
+    });
+
+
+
+        // Swal.fire({
+        //     type: 'success',
+        //     title: 'Good job !Login Successfully',
+        // })
+        // setTimeout(function () {
+        //     window.location.replace("/Home");
+        // }, 2000);
     };
 
-    // Function to handle the login form submission
+    //Function to handle the login form submission
 
-    // axios.post("http://127.0.0.1:5000/Google_Register", {
-    //     Name: res.profileObj.name,
-    //     email: res.profileObj.email,
-    //     Contact: '',
-    //     Username: '',
-    //     Password: '',
-    //     C_Password: '',
-
-    // }, {
-    //     headers: { 'Content-Type': 'application/json' }
-    // }).then(response => {
-    //     Swal.fire({
-    //         type: 'success',
-    //         title: 'Good job !Login Successfully',
-    //         timer: 2000,
-
-    //     })
-    //     sessionStorage.setItem('email', email);
-    //     window.location.replace("/Home");
-    //     //history.push("/Home");
-
-    // }).catch(error => {
-
-    //});
-
-
-
+    
     const onFailure = (err) => {
         console.log('failed', err);
         window.location.replace("/learningLogin");
@@ -128,17 +136,18 @@ function LoginForm() {
 
     // const LinkedInPage=()=> {
     //     debugger;
-        const { linkedInLogin } = useLinkedIn({
-            clientId: '77xa3oqothce7p',
-            redirectUri: `${window.location.origin}/linkedin`, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
-            onSuccess: (code) => {
-                console.log(code);
-            },
-            scope: "r_emailaddress r_liteprofile",
-            onError: (error) => {
-                console.log(error);
-            },
-        });
+    const { linkedInLogin } = useLinkedIn({
+        clientId: '77nbhq8z72ul7c',
+        redirectUri: `${window.location.origin}/linkedin`, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
+        onSuccess: (code) => {
+            console.log(code);
+        },
+        scope: "r_emailaddress r_liteprofile",
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
 
     // }
 
@@ -207,27 +216,28 @@ function LoginForm() {
 
                         <br /> <br />
 
-                        
+
                         <br /><br />
-                         <img onClick={linkedInLogin} src={linkedin} alt="Sign in with Linked In" style={{ maxWidth: '180px', cursor: 'pointer' }}/>
+                        <img onClick={linkedInLogin} src={linkedin} alt="Sign in with Linked In" style={{ maxWidth: '180px', cursor: 'pointer' }} />
                         <br /> <br />
+                        {!code && <div>No code</div>}
                         {code && (
-        <div>
-          <div>Authorization Code: {code}</div>
-          <div>
-            Follow{" "}
-            <Link
-              target="_blank"
-              href="https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?context=linkedin%2Fconsumer%2Fcontext&tabs=HTTPS#step-3-exchange-authorization-code-for-an-access-token"
-              rel="noreferrer"
-            >
-              this
-            </Link>{" "}
-            to continue
-          </div>
-        </div>
-      )}
-      {errorMessage && <div>{errorMessage}</div>}
+                            <div>
+                                <div>Authorization Code: {code}</div>
+                                <div>
+                                    Follow{" "}
+                                    <Link
+                                        target="_blank"
+                                        href="https://www.linkedin.com/developers/apps/verification/2c65061f-c62a-4d3b-be36-ec38e6fb4237"
+                                        rel="noreferrer"
+                                    >
+                                        this
+                                    </Link>{" "}
+                                    to continue
+                                </div>
+                            </div>
+                        )}
+                        {errorMessage && <div>{errorMessage}</div>}
                         <h6 className="card-title text-center">New to Kaas? <a href="#">Create Account</a></h6>
 
                         <h6 className="form-control-sm text-center">By creating an account. You Accept Kaas Terms of Services and Privacy Policy</h6>
