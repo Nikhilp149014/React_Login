@@ -5,7 +5,7 @@ import LearningLogin from "./learningLogin"
 import Login from "./Login"
 import Home from "./Home"
 import Register from "./Register"
-
+import { LinkedInCallback } from "react-linkedin-login-oauth2";
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
         <Route path="/LearningLogin" element={<LearningLogin />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Home" element={<Home />} />
-        
+        <Route exact path="/linkedin" component={LinkedInCallback} />
 
       </Routes>
     </BrowserRouter>

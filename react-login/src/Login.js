@@ -22,7 +22,7 @@ function LoginLayout() {
                 </div>
                 <div className="col-md-7">
                 </div>
-                <div className="col-md-2 rounded float-start">
+                <div className="col-md-2 rounded float-start mt-3">
                     <button className="btn btn-danger btn-lg" onClick={routeChange}>
                         Sign In
                     </button>

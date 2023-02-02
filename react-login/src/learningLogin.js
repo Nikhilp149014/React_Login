@@ -6,8 +6,9 @@ import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
-import FacebookLogin from "react-facebook-login";
-import { Card, Image } from 'react-bootstrap';
+import { useLinkedIn } from 'react-linkedin-login-oauth2';
+import linkedin from 'react-linkedin-login-oauth2/assets/linkedin.png';
+import styled from "styled-components";
 
 
 function LoginForm() {
@@ -15,7 +16,11 @@ function LoginForm() {
     // const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // const { linkedInLogin } = useState('');
     const navigate = useNavigate();
+    const [code, setCode] = React.useState("");
+    
+  const [errorMessage, setErrorMessage] = React.useState("");
     const routeChange = () => {
         console.log("onclick triggered!!!");
         navigate('/Home');
@@ -40,14 +45,17 @@ function LoginForm() {
             )
             localStorage.setItem('access_token', response.data.access_token);
             sessionStorage.setItem('email', email);
-            window.location.replace("/Home");
+            setTimeout(function () {
+                window.location.replace("/Home");
+            }, 2000);
 
             // history.push("/dashboard");
 
         }).catch(error => {
             Swal.fire({
-                type: 'fail',
-                title: error.response.data.msg,
+                type: 'error',
+                title: 'Oops...',
+                text: error.response.data.message,
                 timer: 5000,
 
             })
@@ -69,64 +77,42 @@ function LoginForm() {
     const onSuccess = (res) => {
         setProfile(res.profileObj);
         Swal.fire({
-                    type: 'success',
-                 title: 'Good job !Login Successfully',    
-                 })
-        setTimeout(function(){
-             window.location.replace("/Home");
-         }, 2000);
-        };
+            type: 'success',
+            title: 'Good job !Login Successfully',
+        })
+        setTimeout(function () {
+            window.location.replace("/Home");
+        }, 2000);
+    };
 
-        // Function to handle the login form submission
+    // Function to handle the login form submission
 
-        // axios.post("http://127.0.0.1:5000/Google_Register", {
-        //     Name: res.profileObj.name,
-        //     email: res.profileObj.email,
-        //     Contact: '',
-        //     Username: '',
-        //     Password: '',
-        //     C_Password: '',
+    // axios.post("http://127.0.0.1:5000/Google_Register", {
+    //     Name: res.profileObj.name,
+    //     email: res.profileObj.email,
+    //     Contact: '',
+    //     Username: '',
+    //     Password: '',
+    //     C_Password: '',
 
-        // }, {
-        //     headers: { 'Content-Type': 'application/json' }
-        // }).then(response => {
-        //     Swal.fire({
-        //         type: 'success',
-        //         title: 'Good job !Login Successfully',
-        //         timer: 2000,
+    // }, {
+    //     headers: { 'Content-Type': 'application/json' }
+    // }).then(response => {
+    //     Swal.fire({
+    //         type: 'success',
+    //         title: 'Good job !Login Successfully',
+    //         timer: 2000,
 
-        //     })
-        //     sessionStorage.setItem('email', email);
-        //     window.location.replace("/Home");
-        //     //history.push("/Home");
+    //     })
+    //     sessionStorage.setItem('email', email);
+    //     window.location.replace("/Home");
+    //     //history.push("/Home");
 
-        // }).catch(error => {
+    // }).catch(error => {
 
-
-        //     Swal.fire({
-        //         type: 'fail',
-        //         title: error.response.data.message,
-        //         timer: 5000,
-
-        //     })
+    //});
 
 
-            // Swal.fire({
-            //     title: "Are you sure?",
-            //     text: "You will not be able to recover this imaginary file!",
-            //     type: "warning",
-            //     showCancelButton: true,
-            //     confirmButtonColor: '#DD6B55',
-            //     confirmButtonText: 'Yes, I am sure!',
-            //     cancelButtonText: "No, cancel it!"
-            //  }).then(
-            //        function () {  },
-            //        function () { return false; });
-            
-            //window.location.replace("/learningLogin");
-        //});
-
-    
 
     const onFailure = (err) => {
         console.log('failed', err);
@@ -138,28 +124,30 @@ function LoginForm() {
     };
     //#google login end region
 
-    //#facebook login start region
-    const [login, setLogin] = useState(false);
-    const [data, setData] = useState({});
-    const [picture, setPicture] = useState('');
-    const responseFacebook = (response) => {
-        console.log(response);
-        setData(response);
-        setPicture(response.picture.data.url);
-        if (response.accessToken) {
-            setLogin(true);
-            window.location.replace("/Home");
-        } else {
-            setLogin(false);
-            window.location.replace("/learningLogin");
-        }
-    }
+    //#region linkdin login start here
 
-    //#facebook login end region 
+    // const LinkedInPage=()=> {
+    //     debugger;
+        const { linkedInLogin } = useLinkedIn({
+            clientId: '77xa3oqothce7p',
+            redirectUri: `${window.location.origin}/linkedin`, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
+            onSuccess: (code) => {
+                console.log(code);
+            },
+            scope: "r_emailaddress r_liteprofile",
+            onError: (error) => {
+                console.log(error);
+            },
+        });
+
+    // }
+
+    //#endregion linkdin login end here
 
     return (
 
         <div className="container-fluid">
+
             <div className="row header">
                 <div className="col-md-1">
 
@@ -218,11 +206,28 @@ function LoginForm() {
                         <GoogleLogin type="submit" clientId={clientId} buttonText="Sign in with Google" onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'} className="btn btn-outline border form-control mb-3" width="100%" />
 
                         <br /> <br />
-                      
-                            <FacebookLogin type="submit" className="btn btn-outline border form-control mb-3" appId="3593885710891693" autoLoad={false} fields="name,email,picture" scope="public_profile,user_friends" callback={responseFacebook} icon="fa-facebook" />
 
-                       
+                        
+                        <br /><br />
+                         <img onClick={linkedInLogin} src={linkedin} alt="Sign in with Linked In" style={{ maxWidth: '180px', cursor: 'pointer' }}/>
                         <br /> <br />
+                        {code && (
+        <div>
+          <div>Authorization Code: {code}</div>
+          <div>
+            Follow{" "}
+            <Link
+              target="_blank"
+              href="https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?context=linkedin%2Fconsumer%2Fcontext&tabs=HTTPS#step-3-exchange-authorization-code-for-an-access-token"
+              rel="noreferrer"
+            >
+              this
+            </Link>{" "}
+            to continue
+          </div>
+        </div>
+      )}
+      {errorMessage && <div>{errorMessage}</div>}
                         <h6 className="card-title text-center">New to Kaas? <a href="#">Create Account</a></h6>
 
                         <h6 className="form-control-sm text-center">By creating an account. You Accept Kaas Terms of Services and Privacy Policy</h6>
@@ -233,27 +238,6 @@ function LoginForm() {
                         <div className="row">
                             <div className="col-md-2"></div>
                             <div className="col-md-4">
-
-                                {/* <div>
-                                    <img src={profile.imageUrl} alt="user image" />
-                                    <h3>User Logged in</h3>
-                                    <p>Name: {profile.name}</p>
-                                    <p>Email Address: {profile.email}</p>
-                                    <br />
-                                    <br />
-                                </div>
-                                <div className="card">
-                                    {login &&
-                                        <Card.Body>
-                                            <Card.Title>{data.name}</Card.Title>
-                                            <Card.Text>
-                                                {data.email}
-                                            </Card.Text>
-                                        </Card.Body>
-                                    }
-                                </div> */}
-
-
                                 <h1 className="card-title text-left fw-bolder ft-fm">Log in to</h1>
                                 <h1 className="card-title text-left ft-fm">Your</h1>
                                 <h1 className="card-title text-left ft-fm">Learning</h1>
@@ -268,16 +252,16 @@ function LoginForm() {
                         {< img alt="" id="optionalstuff" className="rounded float-end" src={require('../src/images/lower log in page.png')} />}
                     </div>
                 </div>
-
             </form>
-
-            {/* <Alert variant="success">Logged In Sucessfully</Alert> */}
-
-
-
         </div>
 
         //container-fluid
     )
 }
+
+const Link = styled.a`
+  font-size: 20px;
+  font-weight: bold;
+`;
+
 export default LoginForm;
