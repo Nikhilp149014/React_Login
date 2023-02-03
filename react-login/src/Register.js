@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 
 
 function RegisterForm() {
-    debugger;
+    // debugger;
     const navigate = useNavigate();
     // const history = useHistory();
     const [username, setUserName] = useState('');
@@ -25,10 +25,11 @@ function RegisterForm() {
 
     // Function to handle the login form submission
     const handleSubmit = async (e) => {
-        e.preventDefault();       
+        debugger
+        e.preventDefault();
         axios.post("http://127.0.0.1:5000/Register", {
             Name: name,
-            email: email,            
+            email: email,
             Contact: contact,
             Username: username,
             Password: password,
@@ -44,17 +45,17 @@ function RegisterForm() {
             )
             //localStorage.setItem('access_token', response.data.access_token);
             sessionStorage.setItem('email', email);
-           // window.location.replace("/Register");
+            // window.location.replace("/Register");
 
             // history.push("/dashboard");
 
         }).catch(error => {
-            debugger
+            // debugger
             alert(error);
             Swal.fire(
                 error.response.data,
                 'You clicked the button!',
-               'error'
+                'error'
             )
 
 
@@ -63,9 +64,6 @@ function RegisterForm() {
 
 
     return (
-
-
-
         // # start
         <div className="container-fluid">
             <div className="row header">
@@ -78,8 +76,8 @@ function RegisterForm() {
                 </div>
                 <div className="col-md-1"></div>
                 <div className="col-md-11 me-0">
-                    <h4 className="text-left fs-6">Welcome back</h4>
-                    <h2 className="card-title text-left fs-3">Login to your Account</h2><br />
+                    {/* <h4 className="text-left fs-6">Welcome back</h4> */}
+                    <h2 className="card-title text-left fs-3">Sign Up</h2><br />
                 </div>
             </div>
             <form action="" onSubmit={handleSubmit}>
@@ -88,9 +86,10 @@ function RegisterForm() {
                     <div className="col-md-1"></div>
                     <div className="col-md-3">
                         <div className="mb-0">
-                            <label>Name</label>
+                            {/* <label>Name</label> */}
                             <input
                                 type="text"
+                                placeholder="Type Your Name"
                                 className="form-control mt-3"
                                 name="name"
                                 value={name}
@@ -98,9 +97,10 @@ function RegisterForm() {
                             />
                         </div>
                         <div className="mb-0">
-                            <label>Email address</label>
+                            {/* <label>Email address</label> */}
                             <input
                                 type="email"
+                                placeholder="Type Your Email"
                                 className="form-control mt-3"
                                 name="email"
                                 value={email}
@@ -108,9 +108,10 @@ function RegisterForm() {
                             />
                         </div>
                         <div className="mb-0">
-                            <label>Contact</label>
+                            {/* <label>Contact</label> */}
                             <input
                                 type="text"
+                                placeholder="Mobile Number"
                                 className="form-control mt-3"
                                 name="contact"
                                 value={contact}
@@ -118,16 +119,17 @@ function RegisterForm() {
                             />
                         </div>
                         <div className="mb-0">
-                            <label>User Name</label>
+                            {/* <label>User Name</label> */}
                             <input
-                                type="text"
+                                type="password"
+                                placeholder="Password"
                                 className="form-control mt-3"
                                 name="username"
                                 value={username}
                                 onChange={(e) => setUserName(e.target.value)}
                             />
                         </div>
-                        <div className="mb-0">
+                        {/* <div className="mb-0">
                             <label>Password</label>
                             <input
                                 type="password"
@@ -136,8 +138,8 @@ function RegisterForm() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                        </div>
-                        <div className="mb-0">
+                        </div> */}
+                        {/* <div className="mb-0">
                             <label>Confirm Password</label>
                             <input
                                 type="password"
@@ -145,28 +147,40 @@ function RegisterForm() {
                                 name="c_password"
                                 value={c_password}
                                 onChange={(e) => setc_Password(e.target.value)}
-                            />
-                             <br/>
+                            /> */}
+                        <br />
                         <button type="submit" className="btn btn-danger form-control mb-2" width="100%" name="submit" id="submit">
-                            Sign In
+                            Sign Up
                         </button>
-                        <br/>
-                        <button className="btn btn-danger form-control mb-2" width="100%" onClick={routeChange} id="submit">
+                        <br />
+
+                        <button type="submit" className="form-control mb-2" width="100%" name="submit" id="submit">
+                            <img src={require('../src/images/Google_logo_kass.png')}></img>Or sign-in with Google
+                        </button>
+
+                        <button type="submit" className="form-control mb-2" width="100%" name="submit" id="submit">
+                            <img src={require('../src/images/kaas-logo_linkdin_social.jpg')}></img>Or sign-in with Facebook
+                        </button>
+                        <p className="text-center">Already Register? Sign In</p>
+                        <p className="text-center">By Creating An Account, You Accept Kaas Terms Of Services & Privacy Policy</p>
+
+
+                        {/* <button className="btn btn-danger form-control mb-2" width="100%" onClick={routeChange} id="submit">
                             Login
-                        </button>
-                        </div>
+                        </button> */}
+                        {/* </div> */}
                     </div>
                     <div className="col-md-7">
                         <div className="row">
-                            <div className="col-md-2"></div>
-                            <div className="col-md-4">
-                                <h1 className="card-title text-left fw-bolder ft-fm">Register in to</h1>
-                                <h1 className="card-title text-left ft-fm">Your</h1>
+                            <div className="col-md-2 col-sm-2"></div>
+                            <div className="col-md-4 col-sm-2">
+                                <h1 className="card-title text-left fw-bolder ft-fm">Sign Up Un-ending Learning!</h1>
+                                {/* <h1 className="card-title text-left ft-fm">Your</h1>
                                 <h1 className="card-title text-left ft-fm">Learning</h1>
-                                <h1 className="card-title text-left ft-fm">World.</h1>
+                                <h1 className="card-title text-left ft-fm">World.</h1> */}
                             </div>
-                            <div className="col-md-4">
-                                <img alt="" id="headerimg" className="rounded" src={require('../src/images/log in-02.png')} width="100%" />
+                            <div className="col-md-4 col-sm-2">
+                                <img alt="" id="headerimg" className="rounded" src={require('../src/images/registermainimg.png')} width="100%" />
                             </div>
                         </div>
                     </div>

@@ -13,7 +13,15 @@ function Login() {
                 <div className="col-6">
                     {< img alt="" className="rounded float-end img-responsive" src={require('../src/images/upper graphic log in.png')} />}
                 </div>
-            </div>           
+            </div> 
+            <form action="">
+
+                <div className="row">
+                    <div className='col text-center'>
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </form>          
         </div>
     );
 }

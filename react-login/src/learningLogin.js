@@ -25,6 +25,10 @@ function LoginForm() {
         console.log("onclick triggered!!!");
         navigate('/Home');
     }
+    const routeChangeRegister = () => {
+        console.log("onclick triggered!!!");
+        navigate('/Register');
+    }
     // State for the error message
     //const [error, setError] = useState('');
 
@@ -32,6 +36,7 @@ function LoginForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         debugger
+
         axios.post("http://127.0.0.1:5000/login", {
             email: email,
             Password: password
@@ -55,7 +60,7 @@ function LoginForm() {
             Swal.fire({
                 type: 'error',
                 title: 'Oops...',
-                text: error.response.data.message,
+                text: error.response.data.msg,
                 timer: 5000,
 
             })
@@ -84,29 +89,35 @@ function LoginForm() {
         // const g_googleId=res.profileObj.googleId          //100399866126888046874
 
         axios.post("http://127.0.0.1:5000/Google_Register", {
-        Name: res.profileObj.name ,
-        email: res.profileObj.email,
-        Contact: '',
-        Username: res.profileObj.givenName,
-        Password: '',
-        C_Password: '',
+            Name: res.profileObj.name,
+            email: res.profileObj.email,
+            Contact: '',
+            Username: res.profileObj.givenName,
+            Password: '',
+            C_Password: '',
 
-    }, {
-        headers: { 'Content-Type': 'application/json' }
-    }).then(response => {
-        Swal.fire({
-            type: 'success',
-            title: 'Good job !Login Successfully',
-            timer: 2000,
+        }, {
+            headers: { 'Content-Type': 'application/json' }
+        }).then(response => {
+            Swal.fire({
+                type: 'success',
+                title: 'Good job !Login Successfully',
+                timer: 2000,
 
-        })
-        sessionStorage.setItem('email', email);
-        window.location.replace("/Home");
-        //history.push("/Home");
+            })
+            sessionStorage.setItem('email', email);
+            window.location.replace("/Home");
+            //history.push("/Home");
 
-    }).catch(error => {
+        }).catch(error => {
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: error.response.data.msg,
+                timer: 5000,
 
-    });
+            })
+        });
 
 
 
@@ -121,14 +132,14 @@ function LoginForm() {
 
     //Function to handle the login form submission
 
-    
+
     const onFailure = (err) => {
         console.log('failed', err);
         window.location.replace("/learningLogin");
     };
 
     const logOut = () => {
-        setProfile(null);
+        //setProfile(null);
     };
     //#google login end region
 
@@ -136,17 +147,18 @@ function LoginForm() {
 
     // const LinkedInPage=()=> {
     //     debugger;
-    const { linkedInLogin } = useLinkedIn({
-        clientId: '77nbhq8z72ul7c',
-        redirectUri: `${window.location.origin}/linkedin`, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
-        onSuccess: (code) => {
-            console.log(code);
-        },
-        scope: "r_emailaddress r_liteprofile",
-        onError: (error) => {
-            console.log(error);
-        },
-    });
+    // console.log(window.location.origin);
+    // const { linkedInLogin } = useLinkedIn({
+    //     clientId: '86vhj2q7ukf83q',
+    //     redirectUri: `${window.location.origin}/linkedin`, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
+    //     onSuccess: (code) => {
+    //         console.log(code);
+    //     },
+    //     scope: "r_emailaddress r_liteprofile",
+    //     onError: (error) => {
+    //         console.log(error);
+    //     },
+    // });
 
 
     // }
@@ -210,34 +222,22 @@ function LoginForm() {
                         <button type="submit" className="btn btn-danger form-control mb-2" width="100%" name="submit" id="submit">
                             Sign In
                         </button>
+                        <br /> <button type="submit" className="btn btn-danger form-control mb-2" onClick={routeChangeRegister} width="100%" name="submit" id="submit">
+                            Sign Up
+                        </button>
                         <br />
-
                         <GoogleLogin type="submit" clientId={clientId} buttonText="Sign in with Google" onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'} className="btn btn-outline border form-control mb-3" width="100%" />
+                        {/* <button type="submit" clientId={clientId} className="form-control mb-2" width="100%" name="submit" id="submit" onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'}>
+                            <img src={require('../src/images/Google_logo_kass.png')}></img>Or sign-in with Google
+                        </button> */}
 
+                        <br />
+                        {/* <button type="submit" className="btn btn-linkedin" width="100%" name="submit" id="submit">
+                            Sign In
+                        </button> */}
+                        <br />
+                        {/* <img onClick={linkedInLogin} src={linkedin} alt="Sign in with Linked In" style={{ maxWidth: '180px', cursor: 'pointer' }} /> */}
                         <br /> <br />
-
-
-                        <br /><br />
-                        <img onClick={linkedInLogin} src={linkedin} alt="Sign in with Linked In" style={{ maxWidth: '180px', cursor: 'pointer' }} />
-                        <br /> <br />
-                        {!code && <div>No code</div>}
-                        {code && (
-                            <div>
-                                <div>Authorization Code: {code}</div>
-                                <div>
-                                    Follow{" "}
-                                    <Link
-                                        target="_blank"
-                                        href="https://www.linkedin.com/developers/apps/verification/2c65061f-c62a-4d3b-be36-ec38e6fb4237"
-                                        rel="noreferrer"
-                                    >
-                                        this
-                                    </Link>{" "}
-                                    to continue
-                                </div>
-                            </div>
-                        )}
-                        {errorMessage && <div>{errorMessage}</div>}
                         <h6 className="card-title text-center">New to Kaas? <a href="#">Create Account</a></h6>
 
                         <h6 className="form-control-sm text-center">By creating an account. You Accept Kaas Terms of Services and Privacy Policy</h6>
