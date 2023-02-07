@@ -38,8 +38,8 @@ function LoginLayout() {
 
                 </div>
                 <div className="col-md-4">
-                    <div className="col">
-                        < img className="rounded float-center img-wd" src={require('../src/images/gif-for-kaas.gif')} width="100%" />
+                    <div className="col align-items-center">
+                        < img className="rounded float-center" src={require('../src/images/globe tech pen-01.png')} width="100%" />
                     </div>
                     <h1 className="card-title text-center">Up-Skill As You Work</h1>
                     <h4 className="card-title text-center">Learning Anywhere, Anytime</h4>

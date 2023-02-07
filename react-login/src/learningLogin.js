@@ -49,7 +49,16 @@ function LoginForm() {
                 'success'
             )
             localStorage.setItem('access_token', response.data.access_token);
-            sessionStorage.setItem('email', email);
+            sessionStorage.setItem('access_token', response.data.Username);
+            sessionStorage.setItem('access_token', response.data.email);
+            sessionStorage.setItem('access_token', response.data.Contact);   
+            localStorage.setItem('access_token', response.data.Username);
+            localStorage.setItem('access_token', response.data.email);
+            localStorage.setItem('access_token', response.data.Contact);  
+            console.log(response.data.Username)    
+            console.log(response.data.email) 
+            console.log(response.data.Contact)         
+
             setTimeout(function () {
                 window.location.replace("/Home");
             }, 2000);
@@ -60,7 +69,7 @@ function LoginForm() {
             Swal.fire({
                 type: 'error',
                 title: 'Oops...',
-                text: error.response.data.msg,
+                text: error.response.data.message,
                 timer: 5000,
 
             })
@@ -81,12 +90,6 @@ function LoginForm() {
 
     const onSuccess = (res) => {
         setProfile(res.profileObj);
-        // const g_Email=res.profileObj.email              //'imranmulla67@gmail.com'
-        // const g_name=res.profileObj.name                // imran mulla
-        // const g_familyName=res.profileObj.familyName    //mulla
-        // const g_givenName=res.profileObj.givenName          //imran
-        // const g_imageUrl=res.profileObj.imageUrl          //"https://lh3.googleusercontent.com/a/AEdFTp7hue8frI2XB4WyK5Bqa7aaUxQImzedmUPEdp3MMg=s96-c
-        // const g_googleId=res.profileObj.googleId          //100399866126888046874
 
         axios.post("http://127.0.0.1:5000/Google_Register", {
             Name: res.profileObj.name,
@@ -113,7 +116,7 @@ function LoginForm() {
             Swal.fire({
                 type: 'error',
                 title: 'Oops...',
-                text: error.response.data.msg,
+                text: error.response.data.message,
                 timer: 5000,
 
             })
@@ -269,9 +272,5 @@ function LoginForm() {
     )
 }
 
-const Link = styled.a`
-  font-size: 20px;
-  font-weight: bold;
-`;
 
 export default LoginForm;
