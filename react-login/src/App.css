@@ -139,3 +139,137 @@ color: white;
   margin-left: 7rem;
   /* float:right; */
 }
+.our-product{
+  max-width: 100%;
+    margin-right: 0%;
+    margin-left: 0px;
+    text-align: center;
+  
+}
+.enroll-now-btn{
+  
+  
+  width: 400px;
+  height: 39px;
+  /* background: red;
+  color: white; */
+  
+}
+.contain-1{
+  margin-top: 1%;
+  padding-top: 1%;
+  padding-left: 0px;
+}
+.we-do-text{
+padding-left: 1%;
+}
+.form-control-1{
+  width: 25%;
+}
+.subscribe-btn{
+  margin-top: 3%;
+  position: center;
+  width: 92px;
+  height: 38px;
+  
+  padding-left: 2%;
+    padding-right: 7%;
+  
+  background: #EF1717;
+  color: white;
+  text-align: center;
+}
+.ftr-logo{
+  height: 36%;
+  width: 35%;
+margin-top: 0%;
+margin-left: 0%;
+}
+.form-control-2{
+ 
+}
+.get-started-btn1{
+  position: absolute;
+  margin-top: 0%;
+  width: 132px;
+  height: 31px;
+  background: #EF1717;
+  color: white;
+  text-align: center;
+}
+.vr {
+  display: inline-block;
+  align-self: stretch;
+  width: 2px;
+  min-height: 1em;
+  background-color: red;
+  opacity: 1.5;
+}
+element.style {
+  color: white;
+  background-color: red;
+}
+.social_media_logo_list{
+   list-style: none;
+    display: flex;
+    
+  }
+    
+  .so_media_logo{
+  
+   height: 28px;
+    width: 28px;
+     background-color: red;
+      border-radius: 10%;
+      align-items: center;
+    }
+    /*.ftr-contr{
+      padding-left: 
+      margin-right: 
+    }*/
+    .colorcodeptag
+    {
+      color: white;
+      padding-top: 2%;
+    }
+    .spantagcolorcode{
+      color: red;
+      padding-top: 2%;
+    }
+    .apple-store{
+      margin-right: 20px;
+    }
+    .play-store{
+      /*margin-right: 20px;*/
+      margin-right: -130px;
+    }
+    .span-avail{
+      margin-left: -84px;
+    }
+    .text-footer {
+      text-align: left;
+  }
+  .vl {
+    border-left: 6px solid #ed051b;
+    height: 81px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 3;
+  }
+  .vl-1 {
+    border-left: 6px solid #ed051b;
+    height: 81px;
+    position: absolute;
+    left: 30%;
+    margin-left: 0px;
+    top: 3;
+}
+  .vl-2 {
+    border-left: 6px solid #ed051b;
+    height: 81px;
+    position: absolute;
+    left: 71%;
+    margin-left: 0px;
+    top: 3;
+}

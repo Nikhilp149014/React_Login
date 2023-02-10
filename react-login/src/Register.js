@@ -14,33 +14,37 @@ import linkedin from 'react-linkedin-login-oauth2/assets/linkedin.png';
 function RegisterForm() {
     debugger;
     // const navigate = useNavigate();
-    const [Name, setName] = useState('');
-    const [Username, setUserName] = useState('Imran123');
-    const [email, setEmail] = useState('');
+    const [user_pass, setuser_pass] = useState('');
+    const [display_name, setdisplay_name] = useState('');
+    const [user_nicename, setuser_nicename] = useState('');
+    const [user_login, setuser_login] = useState('');
     const [Contact, setContact] = useState('');
-    const [Password, setPassword] = useState('');
-    const [C_Password, setc_Password] = useState('');
+    const [C_Password, setC_Password] = useState('');
+    const [user_email] = user_login;
+
+
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-
+    const LoginFormSubmit = () => {
+        console.log("onclick triggered!!!");
+        navigate('/Login');
+    }
     const RegisterFormSubmit = async (event) => {
         event.preventDefault();
         setError(null);
-        if (Password !== C_Password) {
+        if (user_pass !== C_Password) {
             setError('Passwords do not match');
             return;
         }       
         try {
             debugger;
-            axios.post('http://127.0.0.1:5000/register',{Name,email,Contact,Username,Password,C_Password})
+            axios.post('http://127.0.0.1:5000/register',{user_nicename,user_login,display_name,user_email,user_pass,C_Password})
                 .then(response => {
                     debugger;
-                    sessionStorage.setItem("Name", response.data.Name);
-                    sessionStorage.setItem("Username", response.data.Username);
-                    sessionStorage.setItem("Password", response.data.Password);
-                    sessionStorage.setItem("email", response.data.email);
-                    sessionStorage.setItem("C_Password", response.data.C_Password);
-                    sessionStorage.setItem("Contact", response.data.Contact);
+                    sessionStorage.setItem("user_nicename", response.data.user_nicename);
+                    sessionStorage.setItem("display_name", response.data.display_name);
+                    sessionStorage.setItem("user_pass", response.data.user_pass);
+                    sessionStorage.setItem("user_login", response.data.user_login);                  
                     sessionStorage.setItem('access_token', response.data.access_token);
                     Swal.fire(
                         'Good job!',
@@ -109,7 +113,7 @@ function RegisterForm() {
                 timer: 2000,
 
             })
-            sessionStorage.setItem('email', email);
+            sessionStorage.setItem('user_pass', user_pass);
             window.location.replace("/Home");
             //history.push("/Home");
 
@@ -139,7 +143,7 @@ function RegisterForm() {
 
     const onFailure = (err) => {
         console.log('failed', err);
-        window.location.replace("/learningLogin");
+        window.location.replace("/Login");
     };
 
     const logOut = () => {
@@ -197,8 +201,8 @@ function RegisterForm() {
                                 placeholder="Type Your Name"
                                 className="form-control mt-3"
                                 name="Name"
-                                value={Name}
-                                onChange={(e) => setName(e.target.value)}
+                                value={user_nicename}
+                                onChange={(e) => setuser_nicename(e.target.value)}
                             />
                         </div>
                         <div className="mb-0">
@@ -207,13 +211,13 @@ function RegisterForm() {
                                 type="email"
                                 placeholder="Type Your Email"
                                 className="form-control mt-3"
-                                name="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                name="user_login"
+                                value={user_login}
+                                onChange={(e) => setuser_login(e.target.value)}
                             />
                         </div>
-                        <div className="mb-0">
-                            {/* <label>Contact</label> */}
+                        {/* <div className="mb-0">
+                         
                             <input
                                 type="text"
                                 placeholder="Mobile Number"
@@ -222,16 +226,16 @@ function RegisterForm() {
                                 value={Contact}
                                 onChange={(e) => setContact(e.target.value)}
                             />
-                        </div>
+                        </div> */}
                         <div className="mb-0">
                             {/* <label>User Name</label> */}
                             <input
                                 type="password"
                                 placeholder="Password"
                                 className="form-control mt-3"
-                                name="password"
-                                value={Password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                name="user_pass"
+                                value={user_pass}
+                                onChange={(e) => setuser_pass(e.target.value)}
                             />
                         </div>
                         <div className="mb-0">
@@ -242,28 +246,10 @@ function RegisterForm() {
                                 className="form-control mt-3"
                                 name="C_password"
                                 value={C_Password}
-                                onChange={(e) => setc_Password(e.target.value)}
+                                onChange={(e) => setC_Password(e.target.value)}
                             />
                         </div>
-                        {/* <div className="mb-0">
-                            <label>Password</label>
-                            <input
-                                type="password"
-                                className="form-control mt-3"
-                                name="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div> */}
-                        {/* <div className="mb-0">
-                            <label>Confirm Password</label>
-                            <input
-                                type="password"
-                                className="form-control mt-3"
-                                name="c_password"
-                                value={c_password}
-                                onChange={(e) => setc_Password(e.target.value)}
-                            /> */}
+                       
                         <br />
                         <button type="submit" className="btn btn-danger form-control mb-2" width="100%" name="Register" onClick={RegisterFormSubmit} id="btnRegister">
                             Sign Up
@@ -272,7 +258,10 @@ function RegisterForm() {
                         {/* <button type="" className="btn btn-danger form-control mb-2" width="100%" name="RegisterTest" onClick={RegisterFormSubmit} id="btnRegistertest">
                             Register
                         </button> */}
-                        <br />
+                    
+                        <button type="submit" className="btn btn-danger form-control mb-2" width="100%" name="Login" onClick={LoginFormSubmit} id="btnLogin">
+                            Sign In
+                        </button>
 
                         {/* <button type="submit" clientId={clientId} onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'}  className="form-control mb-2" width="100%">
                             <img src={require('../src/images/Google_logo_kass.png')}></img>Or sign-in with Google
@@ -299,7 +288,7 @@ function RegisterForm() {
                     <div className="col-md-7">
                         <div className="row">
                             <div className="col-md-2 col-sm-2"></div>
-                            <div className="col-md-4 col-sm-2">
+                            <div className="col-md-4 col-sm-2 pt-5 mt-5">
                                 <h1 className="card-title text-left fw-bolder ft-fm">Sign Up Un-ending Learning!</h1>
                                 {/* <h1 className="card-title text-left ft-fm">Your</h1>
                                 <h1 className="card-title text-left ft-fm">Learning</h1>
