@@ -93,7 +93,7 @@ function LoginForm() {
 
     const onSuccess = (res) => {
         setProfile(res.profileObj);
-        console.log(res.name)         
+        console.log(res.name)
         localStorage.setItem('UserName', res.profileObj.name);
         axios.post("http://127.0.0.1:5000/Google_Register", {
             Name: res.profileObj.name,
@@ -115,7 +115,7 @@ function LoginForm() {
 
         }).catch(error => {
             const msg = error.response.data.message;
-            
+
             if (msg == 'User already exists') {
                 Swal.fire({
                     type: 'success',
@@ -224,7 +224,7 @@ function LoginForm() {
                         <br />
                         <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"></input>
                         <label className="form-check-label ms-2" htmlFor="flexRadioDefault1">Remember me</label>
-                        <Link  className="form-check-label text-end ms-left" onClick={handleShow}>Forget Password?</Link>
+                        <Link className="form-check-label text-end ms-left" onClick={handleShow}>Forget Password?</Link>
                         <br />
                         <br />
                         <button type="submit" className="btn btn-danger form-control mb-2" width="100%" name="submit" id="submit">
@@ -271,37 +271,32 @@ function LoginForm() {
                     </div>
                 </div>
                 <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Your Email Address</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label></Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                autoFocus
-              />
-            </Form.Group>
-           
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="btn btn-secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="btn btn-danger" onClick={handleClose}>
-            Send          </Button>
-        </Modal.Footer>
-      </Modal>
-            </form>
-            
-        </div>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Your Email Address</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label></Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    placeholder="name@example.com"
+                                    autoFocus
+                                />
+                            </Form.Group>
 
-        //container-fluid
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="btn btn-secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="btn btn-danger" onClick={handleClose}>
+                            Send          </Button>
+                    </Modal.Footer>
+                </Modal>
+            </form>
+        </div>
     )
 }
-
-
 export default LoginForm;

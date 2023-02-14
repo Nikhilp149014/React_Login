@@ -22,9 +22,7 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/Landing_Page" element={<Landing_Page />} />
-
         <Route exact path="/linkedin" component={LinkedInCallback} />
-
       </Routes>
     </BrowserRouter>
   )
